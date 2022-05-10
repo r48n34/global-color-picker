@@ -1,18 +1,12 @@
 {
-    "name": "Getting Started Example",
-    "description": "Build an Extension!",
-    "version": "1.0",
+    "name": "Global color picker",
+    "description": "A simple Google Chrome extension for picking color in all of your screen.",
+    "version": "1.1",
     "manifest_version": 3,
     "background": {
         "service_worker": "background.js"
     },
-    "permissions": ["storage", "activeTab", "scripting", "<all_urls>"],
-    "content_scripts":[
-        {
-            "matches":["<all_urls>"],
-            "js": ["sweetalert2.all.min.js"]
-        }
-    ],
+    "permissions": ["activeTab", "scripting"],
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
