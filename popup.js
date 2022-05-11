@@ -1,6 +1,19 @@
 const changeColor = document.getElementById("changeColor");
 
 async function openEyesDrop() {
+
+  function callPopUpBox(message, time = 1800, color = "#000000"){
+
+    const popUpDiv = document.createElement("div");
+    popUpDiv.textContent = message;
+    popUpDiv.id = "popUpColorAlert";
+    popUpDiv.style.cssText = `text-shadow: 2px 4px 3px rgba(0,0,0,0.3); color:${color}; font-family: sans-serif; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; display:flex; align-items:center; justify-content:center; border-radius: 20px; position: fixed; width: 200px; height: 60px; bottom: 3%; left:45%; background-color:#FFFFFF`
+    document.body.appendChild(popUpDiv);
+
+    setTimeout( () => document.getElementById('popUpColorAlert').remove(), time)
+
+  }
+
   if ('EyeDropper' in window) {
     try {
 
@@ -16,23 +29,18 @@ async function openEyesDrop() {
 
       textarea.select();
       document.execCommand("copy");
-
       document.body.removeChild(textarea);
-
-      const popUpDiv = document.createElement("div");
-      popUpDiv.textContent = `Copied ${colorHexValue}`;
-      popUpDiv.id = "popUpColorAlert";
-      popUpDiv.style.cssText = "color:#000000; font-family: sans-serif; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; display:flex; align-items:center; justify-content:center; border-radius: 20px; position: fixed; width: 200px; height: 60px; bottom: 3%; left:45%; background-color:#FFFFFF"
-      document.body.appendChild(popUpDiv);
-      setTimeout( () => document.getElementById('popUpColorAlert').remove(), 1800)
-
+      
+      callPopUpBox(`Copied ${colorHexValue}`, 1800, colorHexValue);
+       
     } catch (err) {
-      return;
+
+      callPopUpBox(`Error, please try again.`, 2500);
     }
 
   }
   else{
-    console.log("Oh no");
+    callPopUpBox(`Your browser is not supported. Please update your browser.`, 4000);
   }
 }
 
