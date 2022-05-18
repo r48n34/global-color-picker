@@ -10,7 +10,7 @@ A simple Google Chrome extension for picking color in all of your screen.
 3. Auto Copy the selected color to clipboard.  
 
 # URL
-Coming soon
+https://chrome.google.com/webstore/detail/global-color-picker/iohmkhahkpicmogdfbnjkejnilbaccgg?hl=zh-TW&authuser=0  
 
 # References
 https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper_API
