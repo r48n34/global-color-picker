@@ -64,5 +64,5 @@ changeColor.addEventListener("click", async () => {
       function: openEyesDrop,
     });
 
-    window.close();
+    //window.close();
 });
