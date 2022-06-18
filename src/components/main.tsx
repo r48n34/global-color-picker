@@ -12,12 +12,9 @@ export function Main({ name = "Extension yo" }) {
     } 
 
     const [ colorCode, setColorCode ] = useState<string>("");
-
     const [ colorArrStore, setColorArrStore ] = useStorage<string[]>("colorArrStore", (storedVal) =>
         typeof storedVal === "undefined" ? [] : storedVal
     )
-
-    //const [ colorArrStore, setColorArrStore ] = useState<string[]>([])
 
     return (
         <div style={{ display: "flex", flexDirection: "column", padding: 8}}>
@@ -33,6 +30,9 @@ export function Main({ name = "Extension yo" }) {
                 leftIcon={<Ballpen size={16} />}
                 onClick={ async () => {
                     let res = await openEyesDrop();
+                    if(res === ""){
+                        return;
+                    }
                     setColorCode(res);
                     setColorArrStore([...colorArrStore, res]);
                 }}
