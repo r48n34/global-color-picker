@@ -2,7 +2,7 @@
   "name": "global-color-picker",
   "displayName": "Global color picker",
   "description": "A simple Google Chrome extension for picking color in all of your screen.",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "author": "reemo",
   "packageManager": "pnpm@7.1.9",
   "scripts": {

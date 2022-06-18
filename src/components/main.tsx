@@ -29,12 +29,14 @@ export function Main({ name = "Extension yo" }) {
             <Button
                 leftIcon={<Ballpen size={16} />}
                 onClick={ async () => {
-                    let res = await openEyesDrop();
-                    if(res === ""){
-                        return;
+                    try{
+                        let res = await openEyesDrop();
+                        setColorCode(res);
+                        setColorArrStore([...colorArrStore, res]);
                     }
-                    setColorCode(res);
-                    setColorArrStore([...colorArrStore, res]);
+                    catch(err:any){
+                        // later
+                    }
                 }}
             >
                 Pick Color
