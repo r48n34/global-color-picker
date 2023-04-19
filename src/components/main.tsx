@@ -4,8 +4,9 @@ import { useStorage } from '@plasmohq/storage';
 import { openEyesDrop } from "~utilis/utilis";
 import { Ballpen } from 'tabler-icons-react';
 import TextAndCopy from "./TextAndCopyComp";
+import toast, { Toaster } from "react-hot-toast";
 
-export function Main({ name = "Extension yo" }) {
+export function Main({ name = "Global color picker" }) {
 
     if (typeof window === 'undefined') { 
         return (<></>)
@@ -17,8 +18,9 @@ export function Main({ name = "Extension yo" }) {
     )
 
     return (
-        <div style={{ display: "flex", flexDirection: "column", padding: 8}}>
- 
+        <>
+        <Toaster />
+        <div style={{ display: "flex", flexDirection: "column", padding: 8 }}>
             <TextAndCopy colorCode={colorCode} setColorArrStore={setColorArrStore}/>
 
             <Group position="center" direction="column">
@@ -33,15 +35,17 @@ export function Main({ name = "Extension yo" }) {
                         let res = await openEyesDrop();
                         setColorCode(res);
                         setColorArrStore([...colorArrStore, res]);
+                        toast.success('Copied to clipboard')
                     }
                     catch(err:any){
+                        toast.error('Fail to Copied')
                         // later
                     }
                 }}
             >
                 Pick Color
             </Button>
-
         </div>
+        </>
     )
 }

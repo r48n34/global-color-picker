@@ -1,5 +1,6 @@
 import { Space, Button, Group, Popover, UnstyledButton, Tooltip } from "@mantine/core";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { Trash } from "tabler-icons-react";
 
 type RemoveColoHistCompProps = {
@@ -31,6 +32,7 @@ function RemoveColoHistComp({ setColorArrStore }: RemoveColoHistCompProps){
                     onClick={ () => {
                         setColorArrStore([]);
                         setOpened(false);
+                        toast.success('Success to clear')
                     }}> 
                     Yes 
                 </Button>

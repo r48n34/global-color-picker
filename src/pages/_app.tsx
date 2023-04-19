@@ -15,12 +15,10 @@ export default function App(props: any) {
                 withGlobalStyles
                 withNormalizeCSS
                 theme={{
-                    colorScheme: 'light',
+                    colorScheme: 'dark',
                 }}
             >
-
                 <Component {...pageProps} />
-
             </MantineProvider>
         </>
     );
