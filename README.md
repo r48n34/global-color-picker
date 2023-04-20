@@ -4,7 +4,10 @@
     <img src="assets/icon512.png" width="200" alt="icon" />  
 </p>
 
+
 This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo) with next.js.  
+
+<img src="https://img.shields.io/chrome-web-store/users/iohmkhahkpicmogdfbnjkejnilbaccgg"  alt="icon" /> 
 
 ## Installation
 https://chrome.google.com/webstore/detail/global-color-picker/iohmkhahkpicmogdfbnjkejnilbaccgg?hl=zh-TW&authuser=0  
