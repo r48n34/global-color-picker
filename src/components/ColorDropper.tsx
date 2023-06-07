@@ -1,6 +1,7 @@
+import React from "react";
 import { ActionIcon, Tooltip } from "@mantine/core";
 import { Ballpen } from "tabler-icons-react";
-import { openEyesDrop } from "~utilis/utilis";
+import { openEyesDrop } from "../utilis/utilis";
 import toast from "react-hot-toast";
 
 type ColorDropperProps = {

@@ -1,30 +1,33 @@
-# global-color-picker  
+This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
 
-<p align="center">
-    <img src="assets/icon512.png" width="200" alt="icon" />  
-</p>
+## Getting Started
 
+First, run the development server:
 
-This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo) with next.js.  
+```bash
+pnpm dev
+# or
+npm run dev
+```
 
-<a href="https://chrome.google.com/webstore/detail/global-color-picker/iohmkhahkpicmogdfbnjkejnilbaccgg?hl=zh-TW&authuser=0 ">
-<img src="https://img.shields.io/chrome-web-store/users/iohmkhahkpicmogdfbnjkejnilbaccgg"  alt="icon" /> 
-</a>
+Open your browser and load the appropriate development build. For example, if you are developing for the chrome browser, using manifest v3, use: `build/chrome-mv3-dev`.
 
-## Installation
-https://chrome.google.com/webstore/detail/global-color-picker/iohmkhahkpicmogdfbnjkejnilbaccgg?hl=zh-TW&authuser=0  
+You can start editing the popup by modifying `popup.tsx`. It should auto-update as you make changes. To add an options page, simply add a `options.tsx` file to the root of the project, with a react component default exported. Likewise to add a content page, add a `content.ts` file to the root of the project, importing some module and do some logic, then reload the extension on your browser.
 
-## Introduction
-A simple Google Chrome extension for picking color in all of your screen.  
-- Only Chrome,Edge version >= 95 or Opera version >= 18 can be used  
-- The EyeDropper API is still on experimental technology, behavior may change in the future.  
+For further guidance, [visit our Documentation](https://docs.plasmo.com/)
 
-## Features  
-1. No extra stuff, just a button, click and use.  
-2. Can be select color outside the browser (Your whole screen).
-3. Auto Copy the selected color to clipboard.  
-4. Record your pick history.  
+## Making production build
 
+Run the following:
 
-## References
-https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper_API
+```bash
+pnpm build
+# or
+npm run build
+```
+
+This should create a production bundle for your extension, ready to be zipped and published to the stores.
+
+## Submit to the webstores
+
+The easiest way to deploy your Plasmo extension is to use the built-in [bpp](https://bpp.browser.market) GitHub action. Prior to using this action however, make sure to build your extension and upload the first version to the store to establish the basic credentials. Then, simply follow [this setup instruction](https://docs.plasmo.com/framework/workflows/submit) and you should be on your way for automated submission!

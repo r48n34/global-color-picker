@@ -1,6 +1,6 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { Card, ColorInput, ColorPicker, Grid, Group, Space, Text } from '@mantine/core';
-import { useStorage } from '@plasmohq/storage';
+import { useStorage } from '@plasmohq/storage/hook';
 import CopyColor from "./CopyColorComp";
 import toast, { Toaster } from "react-hot-toast";
 import { Wheel } from '@uiw/react-color';
@@ -8,7 +8,7 @@ import SaveCurrentColor from "./SaveCurrentColor";
 import RemoveColoHistComp from "./RemoveColoHistComp";
 import ColorDropper from "./ColorDropper";
 
-export function Main({ name = "Global color picker" }) {
+export function Main() {
 
     if (typeof window === 'undefined') { 
         return (<></>)
@@ -25,7 +25,7 @@ export function Main({ name = "Global color picker" }) {
         <div style={{ display: "flex", flexDirection: "column", padding: 8, width: "470px" }}>
 
             <Text ta="center" mb={4} fw={300} fz={26}>
-                Global Color Picker
+                🧭 Global Color Picker
             </Text>
 
             <Grid mt={4}>

@@ -11,6 +11,8 @@
 
 #cache
 .turbo
+.next
+.vercel
 
 # misc
 .DS_Store
@@ -22,17 +24,13 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+
 # local env files
 .env*
 
 out/
 build/
 dist/
-
-# vercel
-.vercel
-/.next/
-/out/
 
 # plasmo - https://www.plasmo.com
 .plasmo
