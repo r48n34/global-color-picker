@@ -14,7 +14,7 @@ function CopyColor({ colorCode }: CopyColorProps) {
 
     return (
         <>
-        <Tooltip label="Copy value" withArrow>
+        <Tooltip label="Copy current value" withArrow>
             <UnstyledButton
                 disabled={copied}
                 onClick={() =>{

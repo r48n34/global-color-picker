@@ -9,7 +9,7 @@ function SaveCurrentColor({ pushCurrentColor }: SaveCurrentColorProps) {
 
     return (
         <>
-        <Tooltip label="Save current color" withArrow>
+        <Tooltip label="Save current color to history" withArrow>
             <ActionIcon onClick={ () => pushCurrentColor() }>
                 <FileSymlink size="1.425rem" />
             </ActionIcon>
