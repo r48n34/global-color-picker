@@ -8,7 +8,7 @@ function IndexPopup() {
       withGlobalStyles
       withNormalizeCSS
       theme={{
-        colorScheme: 'light',
+        colorScheme: 'dark',
       }}
     >
         <Main  /> 

@@ -14,30 +14,35 @@ function RemoveColoHistComp({ setColorArrStore }: RemoveColoHistCompProps){
         <Popover
             opened={opened}
             onClose={() => setOpened(false)}
-            target={
-            <Tooltip label="Remove history" withArrow>
-                <UnstyledButton onClick={() => setOpened((v) => !v)} > 
-                <Trash size={20}/> 
-                </UnstyledButton>
-            </Tooltip>}
             width={180}
             position="bottom"
             withArrow
         >
-            <h4 style={{ margin: 0 }}>Are you sure?</h4>
-            <Space h="xs" />
-            <Group>
-                <Button 
-                    color="red" 
-                    onClick={ () => {
-                        setColorArrStore([]);
-                        setOpened(false);
-                        toast.success('Success to clear')
-                    }}> 
-                    Yes 
-                </Button>
-                <Button onClick={ () => setOpened(false) }> No </Button>
-            </Group>
+            <Popover.Target>
+                <Tooltip label="Remove history" withArrow>
+                    <UnstyledButton onClick={() => setOpened((v) => !v)} > 
+                    <Trash size={20}/> 
+                    </UnstyledButton>
+                </Tooltip>
+            </Popover.Target>
+
+            <Popover.Dropdown>
+                <h4 style={{ margin: 0 }}>Are you sure?</h4>
+                <Space h="xs" />
+                <Group>
+                    <Button 
+                        color="red" 
+                        onClick={ () => {
+                            setColorArrStore([]);
+                            setOpened(false);
+                            toast.success('Success to clear')
+                        }}> 
+                        Yes 
+                    </Button>
+                    <Button onClick={ () => setOpened(false) }> No </Button>
+                </Group>
+            </Popover.Dropdown>
+            
         </Popover>
     )
 }
