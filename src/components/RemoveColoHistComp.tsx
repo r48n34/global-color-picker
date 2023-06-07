@@ -21,13 +21,13 @@ function RemoveColoHistComp({ setColorArrStore }: RemoveColoHistCompProps){
             <Popover.Target>
                 <Tooltip label="Remove history" withArrow>
                     <UnstyledButton onClick={() => setOpened((v) => !v)} > 
-                    <Trash size={20}/> 
+                    <Trash size="1.425rem"/> 
                     </UnstyledButton>
                 </Tooltip>
             </Popover.Target>
 
             <Popover.Dropdown>
-                <h4 style={{ margin: 0 }}>Are you sure?</h4>
+                <h4 style={{ margin: 0 }}>Are you sure to clear all history color?</h4>
                 <Space h="xs" />
                 <Group>
                     <Button 
@@ -42,7 +42,7 @@ function RemoveColoHistComp({ setColorArrStore }: RemoveColoHistCompProps){
                     <Button onClick={ () => setOpened(false) }> No </Button>
                 </Group>
             </Popover.Dropdown>
-            
+
         </Popover>
     )
 }

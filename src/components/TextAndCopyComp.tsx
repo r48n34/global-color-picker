@@ -6,10 +6,9 @@ import RemoveColoHistComp from "./RemoveColoHistComp";
 
 type TextAndCopyProps = {
     colorCode: string;
-    setColorArrStore: Function;
 }
 
-function TextAndCopy({ colorCode, setColorArrStore }: TextAndCopyProps) {
+function TextAndCopy({ colorCode }: TextAndCopyProps) {
     const [ copied, setCopied ] = useState<boolean>(false);
 
     return (

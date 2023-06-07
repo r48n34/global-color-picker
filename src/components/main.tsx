@@ -1,11 +1,11 @@
 import { useState } from "react"
-import { Button, Card, ColorPicker, Grid, Group, Space } from '@mantine/core';
+import { Button, Card, ColorPicker, Grid, Group, Space, Text } from '@mantine/core';
 import { useStorage } from '@plasmohq/storage';
 import { openEyesDrop } from "~utilis/utilis";
 import { Ballpen } from 'tabler-icons-react';
 import TextAndCopy from "./TextAndCopyComp";
 import toast, { Toaster } from "react-hot-toast";
-import { Wheel, Material } from '@uiw/react-color';
+import { Wheel } from '@uiw/react-color';
 import SaveCurrentColor from "./SaveCurrentColor";
 import RemoveColoHistComp from "./RemoveColoHistComp";
 
@@ -25,7 +25,7 @@ export function Main({ name = "Global color picker" }) {
         <Toaster />
         <div style={{ display: "flex", flexDirection: "column", padding: 8, width: "470px" }}>
 
-            <TextAndCopy colorCode={colorCode} setColorArrStore={setColorArrStore}/>
+            <TextAndCopy colorCode={colorCode}/>
 
             <Grid mt={4}>
                 <Grid.Col span={6}>
@@ -54,7 +54,12 @@ export function Main({ name = "Global color picker" }) {
                 <RemoveColoHistComp setColorArrStore={setColorArrStore}/>
             </Group>
 
-            <Card shadow="sm" mt={4}>
+            <Card shadow="sm" mt={6}>
+
+                <Text ta="left" fz={16} fw={400} c="dimmed" mb={2}>
+                    History color
+                </Text>
+
                 <ColorPicker
                     format="hex"
                     value={colorCode}
@@ -66,7 +71,7 @@ export function Main({ name = "Global color picker" }) {
             </Card>
             
             <Button
-                mt={8} variant="light"
+                mt={10} variant="light"
                 leftIcon={<Ballpen size={16} />}
                 onClick={ async () => {
                     try{
@@ -77,7 +82,6 @@ export function Main({ name = "Global color picker" }) {
                     }
                     catch(err:any){
                         toast.error('Fail to Copied')
-                        // later
                     }
                 }}
             >
