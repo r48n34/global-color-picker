@@ -5,10 +5,11 @@ import toast from "react-hot-toast";
 
 type ColorDropperProps = {
     setColorCode: Function;
+    colorArrStore: string[];
     setColorArrStore: Function;
 }
 
-function ColorDropper({ setColorCode, setColorArrStore }: ColorDropperProps) {
+function ColorDropper({ setColorCode, colorArrStore, setColorArrStore }: ColorDropperProps) {
     return (
         <>
         <Tooltip label="Open EyesDrop" withArrow>
@@ -17,7 +18,7 @@ function ColorDropper({ setColorCode, setColorArrStore }: ColorDropperProps) {
                     try {
                         let res = await openEyesDrop();
                         setColorCode(res);
-                        setColorArrStore( v => [...v, res]);
+                        setColorArrStore([...colorArrStore, res]);
                         toast.success('Copied to clipboard!')
                     }
                     catch (err: any) {

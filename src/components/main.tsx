@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Card, ColorInput, ColorPicker, Grid, Group, Space, Text } from '@mantine/core';
 import { useStorage } from '@plasmohq/storage';
 import CopyColor from "./CopyColorComp";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { Wheel } from '@uiw/react-color';
 import SaveCurrentColor from "./SaveCurrentColor";
 import RemoveColoHistComp from "./RemoveColoHistComp";
@@ -23,6 +23,10 @@ export function Main({ name = "Global color picker" }) {
         <>
         <Toaster />
         <div style={{ display: "flex", flexDirection: "column", padding: 8, width: "470px" }}>
+
+            <Text ta="center" mb={4} fw={300} fz={26}>
+                Global Color Picker
+            </Text>
 
             <Grid mt={4}>
                 <Grid.Col span={6}>
@@ -46,11 +50,14 @@ export function Main({ name = "Global color picker" }) {
 
             <Group position="apart" mt={8}>
                 <Group>
-                    <SaveCurrentColor 
-                        pushCurrentColor={() => setColorArrStore([...colorArrStore, colorCode])}
-                    />
-                    <ColorDropper setColorCode={setColorCode} setColorArrStore={setColorArrStore}/>
+                    <ColorDropper setColorCode={setColorCode} colorArrStore={colorArrStore} setColorArrStore={setColorArrStore}/>
                     <CopyColor colorCode={colorCode}/>
+                    <SaveCurrentColor 
+                        pushCurrentColor={() => {
+                            setColorArrStore([...colorArrStore, colorCode]);
+                            toast.success('Saved to storage')
+                        }}
+                    />
                 </Group>
 
                 <RemoveColoHistComp setColorArrStore={setColorArrStore}/>
@@ -58,7 +65,7 @@ export function Main({ name = "Global color picker" }) {
 
             <Card shadow="sm" mt={6}>
 
-                <Text ta="left" fz={16} fw={400} c="dimmed" mb={2}>
+                <Text ta="left" fz={16} fw={400} c="dimmed" mb={2} mt={-2}>
                     History color
                 </Text>
 
