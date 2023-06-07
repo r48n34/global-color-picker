@@ -1,13 +1,12 @@
 import { useState } from "react"
-import { Button, Card, ColorPicker, Grid, Group, Space, Text } from '@mantine/core';
+import { Card, ColorInput, ColorPicker, Grid, Group, Space, Text } from '@mantine/core';
 import { useStorage } from '@plasmohq/storage';
-import { openEyesDrop } from "~utilis/utilis";
-import { Ballpen } from 'tabler-icons-react';
-import TextAndCopy from "./TextAndCopyComp";
-import toast, { Toaster } from "react-hot-toast";
+import CopyColor from "./CopyColorComp";
+import { Toaster } from "react-hot-toast";
 import { Wheel } from '@uiw/react-color';
 import SaveCurrentColor from "./SaveCurrentColor";
 import RemoveColoHistComp from "./RemoveColoHistComp";
+import ColorDropper from "./ColorDropper";
 
 export function Main({ name = "Global color picker" }) {
 
@@ -24,8 +23,6 @@ export function Main({ name = "Global color picker" }) {
         <>
         <Toaster />
         <div style={{ display: "flex", flexDirection: "column", padding: 8, width: "470px" }}>
-
-            <TextAndCopy colorCode={colorCode}/>
 
             <Grid mt={4}>
                 <Grid.Col span={6}>
@@ -47,10 +44,15 @@ export function Main({ name = "Global color picker" }) {
 
             <Space h="xs" />
 
-            <Group>
-                <SaveCurrentColor 
-                    pushCurrentColor={() => setColorArrStore([...colorArrStore, colorCode])}
-                />
+            <Group position="apart" mt={8}>
+                <Group>
+                    <SaveCurrentColor 
+                        pushCurrentColor={() => setColorArrStore([...colorArrStore, colorCode])}
+                    />
+                    <ColorDropper setColorCode={setColorCode} setColorArrStore={setColorArrStore}/>
+                    <CopyColor colorCode={colorCode}/>
+                </Group>
+
                 <RemoveColoHistComp setColorArrStore={setColorArrStore}/>
             </Group>
 
@@ -69,24 +71,17 @@ export function Main({ name = "Global color picker" }) {
                     swatches={colorArrStore}
                 />
             </Card>
-            
-            <Button
-                mt={10} variant="light"
-                leftIcon={<Ballpen size={16} />}
-                onClick={ async () => {
-                    try{
-                        let res = await openEyesDrop();
-                        setColorCode(res);
-                        setColorArrStore([...colorArrStore, res]);
-                        toast.success('Copied to clipboard')
-                    }
-                    catch(err:any){
-                        toast.error('Fail to Copied')
-                    }
+
+            <ColorInput
+                mt={10}
+                size="lg"
+                withEyeDropper
+                value={colorCode}
+                onChange={(v) => {
+                    setColorCode(v);
                 }}
-            >
-                Pick Color
-            </Button>
+            />
+           
         </div>
         </>
     )
