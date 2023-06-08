@@ -19,8 +19,8 @@ function CopyColor({ colorCode }: CopyColorProps) {
                 disabled={copied}
                 onClick={() =>{
                     toCopyBoard(colorCode);
+                    
                     setCopied(true);
-                    toast.success('Copied to clipboard!');
                     setTimeout( () => setCopied(false), 1200);
                 }}
             >

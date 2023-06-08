@@ -8,7 +8,8 @@ import SaveCurrentColor from "./SaveCurrentColor";
 import RemoveColoHistComp from "./RemoveColoHistComp";
 import ColorDropper from "./ColorDropper";
 
-import { ColorPicker as IconColorPicker, ListDetails } from 'tabler-icons-react';
+import { ColorSwatch, ColorPicker as IconColorPicker, ListDetails } from 'tabler-icons-react';
+import ColorDetails from "./ColorDetails";
 
 export function Main() {
 
@@ -69,7 +70,14 @@ export function Main() {
                     </Accordion.Panel>
                 </Accordion.Item>
 
-                <Accordion.Item value="history-color">
+                <Accordion.Item value="color-details" mt={6}>
+                    <Accordion.Control icon={<ColorSwatch size="1rem"/>}>Color details</Accordion.Control>
+                    <Accordion.Panel>
+                        <ColorDetails colorCode={colorCode}/>
+                    </Accordion.Panel>
+                </Accordion.Item>
+
+                <Accordion.Item value="history-color" mt={6}>
                     <Accordion.Control icon={<ListDetails size="1rem"/>}>History color</Accordion.Control>
                     <Accordion.Panel>
                         <ColorPicker
@@ -106,6 +114,9 @@ export function Main() {
                 size="lg"
                 withEyeDropper
                 value={colorCode}
+                swatches={colorArrStore}
+                swatchesPerRow={12}
+                radius="md"
                 onChange={(v) => {
                     setColorCode(v);
                 }}
