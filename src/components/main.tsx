@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Accordion, ColorInput, ColorPicker, Grid, Group, Text } from '@mantine/core';
+import { Accordion, Card, ColorInput, ColorPicker, Grid, Group, Text } from '@mantine/core';
 import { useStorage } from '@plasmohq/storage/hook';
 import CopyColor from "./CopyColorComp";
 import toast, { Toaster } from "react-hot-toast";
@@ -31,7 +31,8 @@ export function Main() {
                 🧭 Global Color Picker
             </Text>
 
-            <Group position="apart" mt={4}>
+            <Card shadow="sm" mt={4} padding="xs" radius="md" withBorder style={{ overflow: "visible", position: 'sticky', top: 10, zIndex: 3000 }}>
+            <Group position="apart">
                 <Group>
                     <ColorDropper setColorCode={setColorCode} colorArrStore={colorArrStore} setColorArrStore={setColorArrStore}/>
                     <CopyColor colorCode={colorCode}/>
@@ -45,6 +46,7 @@ export function Main() {
 
                 <RemoveColoHistComp setColorArrStore={setColorArrStore}/>
             </Group>
+            </Card>
 
             <Accordion variant="filled" mt={8} multiple radius="md">
                 <Accordion.Item value="color-pick">
