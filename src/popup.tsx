@@ -5,14 +5,14 @@ import { Main } from "~components/main"
 function IndexPopup() {
   return (
     <MantineProvider
-    withGlobalStyles
-    withNormalizeCSS
-    theme={{
-      colorScheme: 'dark',
-    }}
-  >
+      withGlobalStyles
+      withNormalizeCSS
+      theme={{
+        colorScheme: 'dark',
+      }}
+    >
       <Main />
-  </MantineProvider>
+    </MantineProvider>
   )
 }
 

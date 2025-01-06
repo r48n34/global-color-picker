@@ -3,7 +3,7 @@ import { useState } from "react";
 import { UnstyledButton, Tooltip } from "@mantine/core";
 import { Copy, CircleCheck } from "tabler-icons-react";
 import { toCopyBoard } from "../utilis/utilis";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 
 type CopyColorProps = {
     colorCode: string;
