@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 async function openEyesDrop(): Promise<string> {
     return new Promise((rec, rej) => {
         if (!("EyeDropper" in window)) {
-            rej("");
+            rej("EyeDropper is not supported in your device.");
         }
 
         const eyeDropper = new (window as any).EyeDropper();
@@ -13,14 +13,13 @@ async function openEyesDrop(): Promise<string> {
         eyeDropper.open({ signal: abortController.signal }).then(
             (result: any) => {
                 const colorHexValue: string = result.sRGBHex;
-
                 toCopyBoard(colorHexValue);
 
                 rec(colorHexValue);
             },
         )
             .catch((e: any) => {
-                rej("");
+                rej("Canceled");
             });
     });
 }
@@ -99,4 +98,33 @@ function timer(delay: number = 1000) {
     });
 }
 
-export { timer, hexToHSL, hexToRgb, openEyesDrop, randomHexColor, toCopyBoard };
+function hidePOPUp() {
+    if (!!document) {
+        document.body.style.height = "0px";
+        document.getElementById("__plasmo").style.height = "0px";
+
+        document.body.style.width = "0px";
+        document.getElementById("__plasmo").style.width = "0px";
+    }
+}
+
+function showPOPUp() {
+    if (!!document) {
+        document.body.style.height = "auto";
+        document.getElementById("__plasmo").style.height = "auto";
+
+        document.body.style.width = "470px";
+        document.getElementById("__plasmo").style.width = "470px";
+    }
+}
+
+export {
+    hexToHSL,
+    hexToRgb,
+    hidePOPUp,
+    openEyesDrop,
+    randomHexColor,
+    showPOPUp,
+    timer,
+    toCopyBoard,
+};

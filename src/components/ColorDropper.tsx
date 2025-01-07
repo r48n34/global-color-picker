@@ -1,7 +1,7 @@
 import React from "react";
 import { ActionIcon, Tooltip } from "@mantine/core";
 import { Ballpen } from "tabler-icons-react";
-import { openEyesDrop, timer } from "../utilis/utilis";
+import { hidePOPUp, openEyesDrop, showPOPUp, timer } from "../utilis/utilis";
 import toast from "react-hot-toast";
 
 type ColorDropperProps = {
@@ -13,26 +13,29 @@ type ColorDropperProps = {
 function ColorDropper({ setColorCode, colorArrStore, setColorArrStore }: ColorDropperProps) {
     return (
         <>
-        <Tooltip label="Open EyesDrop" withArrow>
+        <Tooltip label="Pick Color" withArrow zIndex={9999}>
             <ActionIcon
+                color="#dbdbdb"
+                variant="subtle"
                 onClick={async () => {
                     try {
-
-                        document.body.style.width = "0px"
-                        document.body.style.height = "0px"
-
+                        hidePOPUp();   
                         await timer(60);
+                        
+                        const coloeCode = await openEyesDrop();
 
-                        let res = await openEyesDrop();
-
-                        document.body.style.width = "470px"
-                        document.body.style.height = "auto"
-
-                        setColorCode(res);
-                        setColorArrStore([...colorArrStore, res]);
+                        setColorCode(coloeCode);
+                        setColorArrStore([...colorArrStore, coloeCode]);
                     }
-                    catch (err: any) {
-                        toast.error('Fail to Copied')
+                    catch (error) {
+                        console.log(error);
+                        if(error !== "Canceled"){
+                            console.error(error);
+                            toast.error('Fail to Copied')
+                        }
+                    }
+                    finally{
+                        showPOPUp();
                     }
                 }}
             >

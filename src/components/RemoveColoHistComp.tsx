@@ -1,5 +1,5 @@
 import React from "react";
-import { Space, Button, Group, Popover, UnstyledButton, Tooltip } from "@mantine/core";
+import { Space, Button, Group, Popover, UnstyledButton, Tooltip, Text } from "@mantine/core";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Trash } from "tabler-icons-react";
@@ -22,13 +22,17 @@ function RemoveColoHistComp({ setColorArrStore }: RemoveColoHistCompProps){
             <Popover.Target>
                 <Tooltip label="Remove all history" withArrow>
                     <UnstyledButton onClick={() => setOpened((v) => !v)} > 
-                    <Trash size="1.425rem"/> 
+                    <Trash size="1.325rem"/> 
                     </UnstyledButton>
                 </Tooltip>
             </Popover.Target>
 
             <Popover.Dropdown>
-                <h4 style={{ margin: 0 }}>Are you sure to clear all history color?</h4>
+
+                <Text style={{ margin: 0 }}>
+                    Are you sure to clear all history color?
+                </Text>
+
                 <Space h="xs" />
                 <Group>
                     <Button 

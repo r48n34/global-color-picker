@@ -12,10 +12,10 @@ function ColorDetails({ colorCode = "#FFFFFF" }: ColorDetailsProps){
 
     return (
         <>
-        <Grid mt={4}>
+        <Grid>
             <Grid.Col span={12}>
                 <UnstyledButton onClick={ () => toCopyBoard(colorCode)}>
-                <Group position="left" spacing="xs">
+                <Group>
                     <Box>
                         <Text fz={10} c="dimmed">Hex</Text>
                         <Text fz={18}>{colorCode}</Text>
@@ -41,10 +41,6 @@ function ColorDetails({ colorCode = "#FFFFFF" }: ColorDetailsProps){
                 </UnstyledButton>
             </Grid.Col>
         </Grid>
-
-
-
-
         </>
     )
 }

@@ -10,11 +10,15 @@ function SaveCurrentColor({ pushCurrentColor }: SaveCurrentColorProps) {
 
     return (
         <>
-        <Tooltip label="Save current color to history" withArrow>
-            <ActionIcon onClick={ () => pushCurrentColor() }>
-                <FileSymlink size="1.425rem" />
-            </ActionIcon>
-        </Tooltip>
+            <Tooltip label="Save current color to history" withArrow zIndex={9999}>
+                <ActionIcon
+                    color="#dbdbdb"
+                    onClick={() => pushCurrentColor()}
+                    variant="subtle"
+                >
+                    <FileSymlink size="1.425rem" />
+                </ActionIcon>
+            </Tooltip>
         </>
     )
 }

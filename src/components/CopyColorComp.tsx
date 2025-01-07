@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { UnstyledButton, Tooltip } from "@mantine/core";
+import { UnstyledButton, Tooltip, ActionIcon } from "@mantine/core";
 import { Copy, CircleCheck } from "tabler-icons-react";
 import { toCopyBoard } from "../utilis/utilis";
 // import toast from "react-hot-toast";
@@ -14,8 +14,10 @@ function CopyColor({ colorCode }: CopyColorProps) {
 
     return (
         <>
-        <Tooltip label="Copy current value" withArrow>
-            <UnstyledButton
+        <Tooltip label="Copy current value" withArrow zIndex={9999}>
+            <ActionIcon
+                color="#dbdbdb"
+                variant="subtle"
                 disabled={copied}
                 onClick={() =>{
                     toCopyBoard(colorCode);
@@ -25,7 +27,7 @@ function CopyColor({ colorCode }: CopyColorProps) {
                 }}
             >
                 { copied ? <CircleCheck color={'#2d8660'} size="1.425rem"/> :<Copy size="1.425rem"/>}
-            </UnstyledButton>
+            </ActionIcon>
         </Tooltip>
         </>
     )

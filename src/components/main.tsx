@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Accordion, Card, ColorInput, ColorPicker, Grid, Group, Text } from '@mantine/core';
+import { Accordion, Box, Card, ColorInput, ColorPicker, Container, Grid, Group, Text } from '@mantine/core';
 import { useStorage } from '@plasmohq/storage/hook';
 import CopyColor from "./CopyColorComp";
 import toast, { Toaster } from "react-hot-toast";
@@ -24,107 +24,129 @@ export function Main() {
     )
 
     return (
-        <>
+        <Box style={{ padding: 8, width: "470px", height: "100%", overflow: "hidden" }}>
             <Toaster />
-            <div style={{ display: "flex", flexDirection: "column", padding: 8, width: "470px" }}>
 
-                <Text ta="center" mb={4} fw={300} fz={22}>
-                    🧭 Global Color Picker
+            <Text ta="center" mb={4} fw={300} fz={22}>
+                🧭 Global Color Picker
+            </Text>
+
+            <Container>
+                <Text>
+                    <ColorSwatch size="1rem" /> Color details
                 </Text>
 
-                <Accordion variant="filled" mt={8} multiple radius="md">
-                    <Accordion.Item value="color-pick">
-                        <Accordion.Control icon={<IconColorPicker size="1rem" />} >Color Pick</Accordion.Control>
-                        <Accordion.Panel>
-                            <Grid mt={4}>
-                                <Grid.Col span={6}>
-                                    <Group position="center">
-                                        <Wheel color={colorCode} onChange={(color) => setColorCode(color.hex)} />
-                                    </Group>
-                                </Grid.Col>
+                <ColorDetails colorCode={colorCode} />
+            </Container>
 
-                                <Grid.Col span={6}>
-                                    <Group position="center">
-                                        <ColorPicker
-                                            size="lg"
-                                            value={colorCode}
-                                            onChange={setColorCode}
-                                        />
-                                    </Group>
-                                </Grid.Col>
-                            </Grid>
-                        </Accordion.Panel>
-                    </Accordion.Item>
 
-                    <Accordion.Item value="color-details" mt={6}>
-                        <Accordion.Control icon={<ColorSwatch size="1rem" />}>Color details</Accordion.Control>
-                        <Accordion.Panel>
-                            <ColorDetails colorCode={colorCode} />
-                        </Accordion.Panel>
-                    </Accordion.Item>
+            <Accordion variant="filled" mt={8} multiple radius="md">
+                {/* <Accordion.Item value="color-pick">
+                    <Accordion.Control icon={<IconColorPicker size="1rem" />} >Color Pick</Accordion.Control>
+                    <Accordion.Panel>
+                        <Grid mt={4}>
+                            <Grid.Col span={6}>
+                                <Group position="center">
+                                    <Wheel color={colorCode} onChange={(color) => setColorCode(color.hex)} />
+                                </Group>
+                            </Grid.Col>
 
-                    <Accordion.Item value="history-color" mt={6}>
-                        <Accordion.Control icon={<ListDetails size="1rem" />}>History color</Accordion.Control>
-                        <Accordion.Panel>
-                            <ColorPicker
-                                format="hex"
-                                value={colorCode}
-                                onChange={setColorCode}
-                                withPicker={false}
-                                fullWidth
-                                swatches={colorArrStore}
-                            />
-                        </Accordion.Panel>
-                    </Accordion.Item>
+                            <Grid.Col span={6}>
+                                <Group position="center">
+                                    <ColorPicker
+                                        size="lg"
+                                        value={colorCode}
+                                        onChange={setColorCode}
+                                    />
+                                </Group>
+                            </Grid.Col>
+                        </Grid>
+                    </Accordion.Panel>
+                </Accordion.Item> */}
 
-                </Accordion>
+                {/* <Accordion.Item value="color-details" mt={6}>
+                    <Accordion.Control icon={<ColorSwatch size="1rem" />}>
+                        Color details
+                    </Accordion.Control>
 
-                <ColorInput
-                    mt={10}
-                    size="lg"
-                    withEyeDropper={false}
-                    
-                    value={colorCode}
-                    swatches={colorArrStore}
-                    swatchesPerRow={12}
-                    radius="md"
-                    dropdownZIndex={9999}
-                    onChangeEnd={(v) => {
-                        setColorCode(v);
-                        toCopyBoard(v);
-                        setColorArrStore([...colorArrStore, v]);
-                    }}
-                />
+                    <Accordion.Panel>
+                        <ColorDetails colorCode={colorCode} />
+                    </Accordion.Panel>
+                </Accordion.Item> */}
 
-                <Card
-                    shadow="sm"
-                    mt={4}
-                    padding="xs"
-                    radius="md"
-                    withBorder
-                    style={{ overflow: "visible", position: 'sticky', top: 10, zIndex: 3000 }}
-                >
-                    <Group position="apart">
-                        <Group>
-                            <ColorDropper
-                                setColorCode={setColorCode}
-                                colorArrStore={colorArrStore}
-                                setColorArrStore={setColorArrStore}
-                            />
-                            <CopyColor colorCode={colorCode} />
-                            <SaveCurrentColor
-                                pushCurrentColor={() => {
-                                    setColorArrStore([...colorArrStore, colorCode]);
-                                    toast.success('Saved to storage')
-                                }}
-                            />
-                        </Group>
 
-                        <RemoveColoHistComp setColorArrStore={setColorArrStore} />
+
+
+                <Accordion.Item value="history-color" mt={6}>
+                    <Accordion.Control icon={<ListDetails size="1rem" />}>
+                        History color
+                    </Accordion.Control>
+
+                    <Accordion.Panel>
+                        {colorArrStore.length >= 1 && (
+                            <Group justify="flex-end">
+                                <RemoveColoHistComp setColorArrStore={setColorArrStore} />
+                            </Group>
+                        )}
+
+                        <ColorPicker
+                            format="hex"
+                            value={colorCode}
+                            onChange={setColorCode}
+                            withPicker={false}
+                            fullWidth
+                            swatches={colorArrStore}
+                        />
+                    </Accordion.Panel>
+                </Accordion.Item>
+
+            </Accordion>
+
+            <Card
+                shadow="sm"
+                mt={4}
+                padding="xs"
+                radius="md"
+                withBorder
+                style={{ overflow: "visible", position: 'sticky', top: 10, zIndex: 3000 }}
+            >
+                <Group justify="space-between">
+                    <Group>
+                        <ColorDropper
+                            setColorCode={setColorCode}
+                            colorArrStore={colorArrStore}
+                            setColorArrStore={setColorArrStore}
+                        />
+                        <CopyColor colorCode={colorCode} />
+                        <SaveCurrentColor
+                            pushCurrentColor={() => {
+                                setColorArrStore([...colorArrStore, colorCode]);
+                                toast.success('Saved to storage')
+                            }}
+                        />
                     </Group>
-                </Card>
 
-            </div>
-        </>
+                    <ColorInput      
+                        size="md"
+                        withEyeDropper={false}
+                        value={colorCode}
+                        swatches={colorArrStore}
+                        swatchesPerRow={12}
+                        radius="md"
+                        variant="unstyled"
+                        popoverProps={{
+                            zIndex: 9999,
+                            position: "bottom"
+                        }}
+                        onChangeEnd={(v) => {
+                            setColorCode(v);
+                            toCopyBoard(v);
+                        }}
+                    />
+
+                </Group>
+            </Card>
+
+        </Box>
     )
 }
