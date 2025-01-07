@@ -16,13 +16,14 @@ function RemoveColoHistComp({ setColorArrStore }: RemoveColoHistCompProps){
             opened={opened}
             onClose={() => setOpened(false)}
             width={180}
-            position="bottom"
+            position="left"
             withArrow
+            zIndex={9999}
         >
             <Popover.Target>
                 <Tooltip label="Remove all history" withArrow>
                     <UnstyledButton onClick={() => setOpened((v) => !v)} > 
-                    <Trash size="1.325rem"/> 
+                    <Trash size="1.0rem"/> 
                     </UnstyledButton>
                 </Tooltip>
             </Popover.Target>

@@ -1,27 +1,33 @@
-import React, { useState } from "react"
-import { Accordion, Box, Card, ColorInput, ColorPicker, Container, Grid, Group, Text } from '@mantine/core';
+import React, { useEffect, useState } from "react"
+import { Box, Card, ColorInput, ColorPicker, Container, Group, Text } from '@mantine/core';
 import { useStorage } from '@plasmohq/storage/hook';
 import CopyColor from "./CopyColorComp";
 import toast, { Toaster } from "react-hot-toast";
-import { Wheel } from '@uiw/react-color';
 import SaveCurrentColor from "./SaveCurrentColor";
 import RemoveColoHistComp from "./RemoveColoHistComp";
 import ColorDropper from "./ColorDropper";
 
-import { toCopyBoard } from "../utilis/utilis";
-import { ColorSwatch, ColorPicker as IconColorPicker, ListDetails } from 'tabler-icons-react';
+import { ListDetails } from 'tabler-icons-react';
 import ColorDetails from "./ColorDetails";
 
 export function Main() {
 
-    if (typeof window === 'undefined') {
-        return (<></>)
-    }
-
-    const [colorCode, setColorCode] = useState<string>("#FFFFFF");
+    const [initLoaded, setInitLoaded] = useState<boolean>(false);
     const [colorArrStore, setColorArrStore] = useStorage<string[]>("colorArrStore", (storedVal) =>
         typeof storedVal === "undefined" ? [] : storedVal
     )
+    const [colorCode, setColorCode] = useState<string>("#FFFFFF");
+
+    useEffect(() => {
+        if (!initLoaded && colorArrStore.length >= 1) {
+            setColorCode(colorArrStore[colorArrStore.length - 1])
+            setInitLoaded(true)
+        }
+    }, [colorArrStore, initLoaded])
+
+    if (typeof window === 'undefined') {
+        return (<></>)
+    }
 
     return (
         <Box style={{ padding: 8, width: "470px", height: "100%", overflow: "hidden" }}>
@@ -32,75 +38,36 @@ export function Main() {
             </Text>
 
             <Container>
-                <Text>
+                {/* <Text c="dimmed" fz={14}>
                     <ColorSwatch size="1rem" /> Color details
-                </Text>
-
+                </Text> */}
                 <ColorDetails colorCode={colorCode} />
             </Container>
 
+            <Container mt={16} mb={12}>
+                <Group justify="space-between">
+                    <Text c="dimmed" fz={14}>
+                        <ListDetails size="0.8rem" /> History color
+                    </Text>
 
-            <Accordion variant="filled" mt={8} multiple radius="md">
-                {/* <Accordion.Item value="color-pick">
-                    <Accordion.Control icon={<IconColorPicker size="1rem" />} >Color Pick</Accordion.Control>
-                    <Accordion.Panel>
-                        <Grid mt={4}>
-                            <Grid.Col span={6}>
-                                <Group position="center">
-                                    <Wheel color={colorCode} onChange={(color) => setColorCode(color.hex)} />
-                                </Group>
-                            </Grid.Col>
-
-                            <Grid.Col span={6}>
-                                <Group position="center">
-                                    <ColorPicker
-                                        size="lg"
-                                        value={colorCode}
-                                        onChange={setColorCode}
-                                    />
-                                </Group>
-                            </Grid.Col>
-                        </Grid>
-                    </Accordion.Panel>
-                </Accordion.Item> */}
-
-                {/* <Accordion.Item value="color-details" mt={6}>
-                    <Accordion.Control icon={<ColorSwatch size="1rem" />}>
-                        Color details
-                    </Accordion.Control>
-
-                    <Accordion.Panel>
-                        <ColorDetails colorCode={colorCode} />
-                    </Accordion.Panel>
-                </Accordion.Item> */}
-
-
-
-
-                <Accordion.Item value="history-color" mt={6}>
-                    <Accordion.Control icon={<ListDetails size="1rem" />}>
-                        History color
-                    </Accordion.Control>
-
-                    <Accordion.Panel>
+                    <Group justify="flex-end">
                         {colorArrStore.length >= 1 && (
-                            <Group justify="flex-end">
-                                <RemoveColoHistComp setColorArrStore={setColorArrStore} />
-                            </Group>
+                            <RemoveColoHistComp setColorArrStore={setColorArrStore} />
                         )}
+                    </Group>
+                </Group>
 
-                        <ColorPicker
-                            format="hex"
-                            value={colorCode}
-                            onChange={setColorCode}
-                            withPicker={false}
-                            fullWidth
-                            swatches={colorArrStore}
-                        />
-                    </Accordion.Panel>
-                </Accordion.Item>
-
-            </Accordion>
+                <ColorPicker
+                    size="md"
+                    format="hex"
+                    value={colorCode}
+                    onChange={setColorCode}
+                    withPicker={false}
+                    fullWidth
+                    swatchesPerRow={12}
+                    swatches={colorArrStore}
+                />
+            </Container>
 
             <Card
                 shadow="sm"
@@ -126,12 +93,10 @@ export function Main() {
                         />
                     </Group>
 
-                    <ColorInput      
-                        size="md"
+                    <ColorInput
+                        size="sm"
                         withEyeDropper={false}
                         value={colorCode}
-                        swatches={colorArrStore}
-                        swatchesPerRow={12}
                         radius="md"
                         variant="unstyled"
                         popoverProps={{
@@ -140,7 +105,6 @@ export function Main() {
                         }}
                         onChangeEnd={(v) => {
                             setColorCode(v);
-                            toCopyBoard(v);
                         }}
                     />
 

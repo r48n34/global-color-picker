@@ -1,9 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import { UnstyledButton, Tooltip, ActionIcon } from "@mantine/core";
+import { Tooltip, ActionIcon } from "@mantine/core";
 import { Copy, CircleCheck } from "tabler-icons-react";
 import { toCopyBoard } from "../utilis/utilis";
-// import toast from "react-hot-toast";
 
 type CopyColorProps = {
     colorCode: string;
